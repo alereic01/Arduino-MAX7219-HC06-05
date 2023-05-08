@@ -1,4 +1,28 @@
-#include <SPI.h>
+#include <LedControl.h>
+
+LedControl lc = LedControl(12, 11, 10, 1);
+
+void setup() {
+  Serial.begin(9600);
+  lc.shutdown(0, false);
+  lc.setIntensity(0, 8);
+  lc.clearDisplay(0);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char incomingByte = Serial.read();
+    lc.setChar(0, 0, incomingByte, true);
+  }
+}
+
+
+
+
+
+
+
+/*#include <SPI.h>
 #include <LedControl.h>
 #include <SoftwareSerial.h>
 
@@ -29,7 +53,7 @@ void  loop() {
     }
   }
 
-}
+}*/
 /* for(int j=0;j<8;j++){
      for(int i=0;i<8;i++){
        lc.setLed(0,j,i,true);
